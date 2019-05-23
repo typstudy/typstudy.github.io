@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="面向对象(OOP) 将功能封装进对象，强调了具备该功能的对象，以类/对象为最小单位，考虑谁来做  面向过程(POP) 强调的是功能行为，以函数为最小单位，考虑怎么怎么做  三大特征 封装 继承 多态  Java语言的基本元素类和对象 类：对一类事物的描述，是抽象的、概念上的定义 对象：是实际存在的该类事物的每个个体，因而也称为实例(instance) 面向对象程序设计的重点是类的设计 设计类，就是">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/面向对象/index.html">
+<meta property="og:site_name" content="鹏飞@博客">
+<meta property="og:description" content="面向对象(OOP) 将功能封装进对象，强调了具备该功能的对象，以类/对象为最小单位，考虑谁来做  面向过程(POP) 强调的是功能行为，以函数为最小单位，考虑怎么怎么做  三大特征 封装 继承 多态  Java语言的基本元素类和对象 类：对一类事物的描述，是抽象的、概念上的定义 对象：是实际存在的该类事物的每个个体，因而也称为实例(instance) 面向对象程序设计的重点是类的设计 设计类，就是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/oop/oop.png">
+<meta property="og:image" content="http://yoursite.com/images/oop/oop2.png">
+<meta property="og:image" content="http://yoursite.com/images/oop/oop3.png">
+<meta property="og:image" content="http://yoursite.com/images/oop/oop4.png">
+<meta property="og:updated_time" content="2019-05-19T03:46:58.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象">
+<meta name="twitter:description" content="面向对象(OOP) 将功能封装进对象，强调了具备该功能的对象，以类/对象为最小单位，考虑谁来做  面向过程(POP) 强调的是功能行为，以函数为最小单位，考虑怎么怎么做  三大特征 封装 继承 多态  Java语言的基本元素类和对象 类：对一类事物的描述，是抽象的、概念上的定义 对象：是实际存在的该类事物的每个个体，因而也称为实例(instance) 面向对象程序设计的重点是类的设计 设计类，就是">
+<meta name="twitter:image" content="http://yoursite.com/images/oop/oop.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/06/面向对象/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>面向对象 | 鹏飞@博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鹏飞@博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/面向对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="鹏飞">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹏飞@博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面向对象
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-06 10:36:46" itemprop="dateCreated datePublished" datetime="2019-05-06T10:36:46+08:00">2019-05-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-19 11:46:58" itemprop="dateModified" datetime="2019-05-19T11:46:58+08:00">2019-05-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="面向对象-OOP"><a href="#面向对象-OOP" class="headerlink" title="面向对象(OOP)"></a>面向对象(OOP)</h3><ul>
+<li>将功能封装进对象，强调了具备该功能的对象，以类/对象为最小单位，考虑谁来做</li>
+</ul>
+<h3 id="面向过程-POP"><a href="#面向过程-POP" class="headerlink" title="面向过程(POP)"></a>面向过程(POP)</h3><ul>
+<li>强调的是功能行为，以函数为最小单位，考虑怎么怎么做</li>
+</ul>
+<h3 id="三大特征"><a href="#三大特征" class="headerlink" title="三大特征"></a>三大特征</h3><ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="Java语言的基本元素"><a href="#Java语言的基本元素" class="headerlink" title="Java语言的基本元素"></a>Java语言的基本元素</h3><h4 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h4><ul>
+<li>类：对一类事物的描述，是抽象的、概念上的定义</li>
+<li>对象：是实际存在的该类事物的每个个体，因而也称为实例(instance)<ol>
+<li>面向对象程序设计的重点是类的设计</li>
+<li>设计类，就是设计类的成员。</li>
+</ol>
+</li>
+<li>“万事万物皆对象”</li>
+<li>对象，是由类new出来的，派生出来的。</li>
+</ul>
+<h3 id="类的结构"><a href="#类的结构" class="headerlink" title="类的结构"></a>类的结构</h3><h4 id="属性-field-成员变量"><a href="#属性-field-成员变量" class="headerlink" title="属性(field,成员变量)"></a>属性(field,成员变量)</h4><ul>
+<li>语法格式：修饰符 数据类型 属性名=初始化值;</li>
+<li>成员变量：在方法体外，类体内声明的变量（实例变量(非static修饰)，类变量(以static修饰)）</li>
+<li>局部变量：在方法体内部声明的变量</li>
+<li>*局部变量没有默认初始化值，(除形参，他调用时赋值即可)需要显示初始化</li>
+</ul>
+<p><img src="/images/oop/oop.png" alt></p>
+<h3 id="方法-method，函数"><a href="#方法-method，函数" class="headerlink" title="方法(method，函数)"></a>方法(method，函数)</h3><ul>
+<li><p>描述类应该具的功能。</p>
+</li>
+<li><p>格式：方法的声明：权限修饰符  返回值类型  方法名(形参列表){</p>
+<p>​        方法体</p>
+<p>}</p>
+</li>
+<li><p>return关键字</p>
+<ol>
+<li>结束方法</li>
+<li>针对于返回值类型的方法，使用”return 数据”方法返回所要的数据。</li>
+</ol>
+</li>
+<li><p>方法重载（Overload)</p>
+<ol>
+<li>定义：在同一个类中，允许存在一个以上的同名方法，只要它们的参数个数或者参数类型不同即可。</li>
+<li>总结：”两同一不同”:同一个类、相同方法名<pre><code>参数列表不同：参数个数不同，参数类型不同
+</code></pre></li>
+</ol>
+</li>
+<li><p>可变个数的形参</p>
+<ol>
+<li><p>Jdk 5.0新增的内容</p>
+<ul>
+<li>具体使用：</li>
+<li>可变个数形参的格式：数据类型 … 变量名</li>
+<li>当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
+<li>可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
+<li>可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
+<li>可变个数形参在方法的形参中，必须声明在末尾</li>
+<li>可变个数形参在方法的形参中,最多只能声明一个可变形参。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>方法参数的值传递机制</p>
+<ul>
+<li>参数分类<ol>
+<li>形参：方法定义时，声明的小括号内的参数</li>
+<li>实参：方法调用时，实际传递给形参的数据</li>
+</ol>
+</li>
+<li>java中参数传递机制：值传递<ul>
+<li>规则：<ol>
+<li>如果参数是基本数据类型，此时实参赋给形参的是实参真实存储的数据值。</li>
+<li>如果参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值。</li>
+</ol>
+</li>
+<li>推广：<ol>
+<li>如果变量是基本数据类型，此时赋值的是变量所保存的数据值。</li>
+<li>如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>递归方法</p>
+<ul>
+<li>含义：一个方法体内调用它自身。</li>
+<li>注意：<ol>
+<li>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。</li>
+<li>递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="封装与隐藏"><a href="#封装与隐藏" class="headerlink" title="封装与隐藏"></a>封装与隐藏</h3><ul>
+<li><p>为什么要引入封装性？</p>
+<ol>
+<li>我们程序设计追求“高内聚，低耦合”。<ul>
+<li>高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；</li>
+<li>低耦合 ：仅对外暴露少量的方法用于使用。</li>
+</ul>
+</li>
+<li>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</li>
+</ol>
+</li>
+<li><p>如何实现</p>
+<ol>
+<li>将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值</li>
+</ol>
+</li>
+<li><p>权限修饰符</p>
+<ol>
+<li>private</li>
+<li>缺省</li>
+<li>protected</li>
+<li>public</li>
+</ol>
+<ul>
+<li>注意：<ol>
+<li>4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类</li>
+<li>修饰类的话，只能使用：缺省、public</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="构造器-Constructor或构造方法"><a href="#构造器-Constructor或构造方法" class="headerlink" title="构造器(Constructor或构造方法)"></a>构造器(Constructor或构造方法)</h3><ul>
+<li><p>作用</p>
+<ol>
+<li>创建对象</li>
+<li>初始化对象</li>
+</ol>
+</li>
+<li><p>特征</p>
+<ol>
+<li>具有与类相同的名称</li>
+<li>不声明返回值类型</li>
+<li>不能被static，final，synchronizeed，abstract，native修饰</li>
+<li>不能有return语句返回值</li>
+</ol>
+</li>
+<li><p>注意</p>
+<ol>
+<li><p>如果没显式的定义类的构造器的话，则系统默认提供一个空参的构造器</p>
+</li>
+<li><p>定义构造器的格式：权限修饰符  类名(形参列表){}</p>
+</li>
+<li><p>一个类中定义的多个构造器，彼此构成重载</p>
+</li>
+<li><p>一旦我们显式的定义了类的构造器之后，系统就不再提供默认的空参构造器</p>
+</li>
+<li><p>一个类中，至少会有一个构造器。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h4><ol>
+<li>类是公共的</li>
+<li>一个无参的公共的构造器</li>
+<li>属性，且对应的get、set方法</li>
+</ol>
+<h3 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h3><ol>
+<li><p>可以调用的结构：属性、方法；构造器</p>
+</li>
+<li><p>this调用属性、方法：</p>
+<ul>
+<li><p>this理解为：当前对象  或 当前正在创建的对象</p>
+</li>
+<li><p>在类的方法中，我们可以使用”this.属性”或”this.方法”的方式，调用当前对象属性或方法。但是，</p>
+<p>通常情况下，我们都择省略”this.”。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用”this.</p>
+<p>变量”的方式，表明此变量是属性，而非形参。</p>
+</li>
+<li><p>在类的构造器中，我们可以使用”this.属性”或”this.方法”的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都择省略”this.”。特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
+</li>
+</ul>
+</li>
+<li><p>this调用构造器：</p>
+<ol>
+<li>我们在类的构造器中，可以显式的使用”this(形参列表)”方式，调用本类中指定的其他构造器</li>
+<li>构造器中不能通过”this(形参列表)”方式调用自己</li>
+<li>如果一个类中有n个构造器，则最多有 n - 1构造器中使用了”this(形参列表)”</li>
+<li>规定：”this(形参列表)”必须声明在当前构造器的首行</li>
+<li>构造器内部，最多只能声明一个”this(形参列表)”，用来调用其他的构造器</li>
+</ol>
+</li>
+</ol>
+<h3 id="继承性-inheritance"><a href="#继承性-inheritance" class="headerlink" title="继承性(inheritance)"></a>继承性(inheritance)</h3><ol>
+<li><p>为什么要有继承</p>
+<ul>
+<li>减少了代码的冗余，提高了代码的复用性<ul>
+<li>便于功能的扩展</li>
+<li>为之后多态性的使用，提供了前提</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>继承性的格式：<br>class A extends B{}</p>
+<ul>
+<li>A:子类、派生类、subclass</li>
+<li>B:父类、超类、基类、superclass</li>
+</ul>
+</li>
+<li><p>子类继承父类以后有哪些不同？</p>
+<ul>
+<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。</li>
+<li>特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
+<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。</li>
+<li>子类和父类的关系，不同于子集和集合的关系。</li>
+<li>extends：延展、扩展</li>
+</ul>
+</li>
+<li><p>Java中继承性的说明</p>
+<ul>
+<li><p>一个类可以被多个子类继承。</p>
+</li>
+<li><p>Java中类的单继承性：一个类只能有一个父类</p>
+</li>
+<li>子父类是相对的概念。</li>
+<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类</li>
+<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
+<li>子类不能直接访问父类中的私有的(private)成员变量和方法</li>
+</ul>
+</li>
+<li><p>方法重写(override或overwrite)</p>
+<ol>
+<li>含义：<ul>
+<li>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</li>
+</ul>
+</li>
+<li>重写的规则：<ul>
+<li>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{方法体}</li>
+<li>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</li>
+<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
+<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
+<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
+<li>返回值类型：<ol>
+<li>父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void</li>
+<li>父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类</li>
+<li>父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
+<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型（具体放到异常处理时候讲）</li>
+</ol>
+</li>
+<li>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。</li>
+</ul>
+</li>
+<li>区分方法的重写和重载？<ul>
+<li>二者的概念：</li>
+<li>重载和重写的具体规则</li>
+<li>重载：<ol>
+<li>不表现为多态性。</li>
+<li>重写：表现为多态性。</li>
+<li>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</li>
+<li>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。</li>
+<li>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态.”</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><ol>
+<li><p>super 关键字可以理解为：父类的</p>
+</li>
+<li><p>可以用来调用的结构：属性、方法、构造器</p>
+</li>
+<li><p>super调用属性、方法：</p>
+<ul>
+<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
+<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
+<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法</li>
+</ul>
+</li>
+<li><p>super调用构造器：</p>
+<ul>
+<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
+<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
+<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
+<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器super()</li>
+<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
+</ul>
+</li>
+<li><p>this与super的区别</p>
+<p><img src="\images\oop\oop2.png" alt></p>
+</li>
+</ol>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><ol>
+<li>多态性的理解：可以理解为一个事物的多种形态。</li>
+<li>何为多态性：<br>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</li>
+<li>多态性的使用：虚拟方法调用<ul>
+<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
+<li>总结：编译，看左边；运行，看右边。</li>
+</ul>
+</li>
+<li>多态性的使用前提：<ul>
+<li>类的继承关系 </li>
+<li>方法的重写</li>
+</ul>
+</li>
+<li>多态性使用的注意点：<ul>
+<li>对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</li>
+</ul>
+</li>
+<li>关于向上转型与向下转型：<ul>
+<li>向上转型：多态</li>
+<li>向下转型：<ol>
+<li>为什么使用向下转型：<ul>
+<li>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</li>
+<li>如何实现向下转型：使用强制类型转换符：()</li>
+<li>使用时的注意点：<ol>
+<li>使用强转时，可能出现ClassCastException的异常。</li>
+<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型</li>
+</ol>
+</li>
+<li>instanceof的使用：<ol>
+<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
+<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
+<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h3><ol>
+<li><p>java.lang.Object类的说明：</p>
+<ul>
+<li>1.Object类是所Java类的根父类</li>
+<li>2.如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
+<li>3.Object类中的功能(属性、方法)就具通用性。</li>
+<li>属性：无</li>
+<li>方法：equals() / toString() / getClass() /hashCode() / clone() / finalize()，wait() 、 notify()、notifyAll()</li>
+<li>Object类只声明了一个空参的构造器</li>
+</ul>
+</li>
+<li><p>equals方法</p>
+<ul>
+<li><p>是一个方法，而非运算符</p>
+<ul>
+<li><ol start="2">
+<li>只能适用于引用数据类型</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Object类中equals()的定义：</li>
+</ol>
+<p>public boolean equals(Object obj) {</p>
+<pre><code>return (this == obj);
+</code></pre><p> }</p>
+</li>
+<li><p>说明：Object类中定义的equals()和==的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</p>
+</li>
+<li><ol start="4">
+<li>像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是</li>
+</ol>
+</li>
+<li><p>两个引用的地址是否相同，而是比较两个对象的”实体内容”是否相同。</p>
+</li>
+<li><ol start="5">
+<li>通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的”实体内容”是否相同。那我们就需要对Object类中的equals()进行重写.</li>
+</ol>
+</li>
+<li><p>重写的原则：比较两个对象的实体内容是否相同.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>toString方法</p>
+</li>
+<li><p>==与equals()的区别</p>
+<ul>
+<li>==<ol>
+<li>== ：运算符</li>
+<li>可以使用在基本数据类型变量和引用数据类型变量中<ol start="3">
+<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）</li>
+<li>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
+<li>补充： == 符号使用时，必须保证符号左右两边的变量类型一致。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>equals<ol>
+<li>只能作用于用于数据类型</li>
+<li>自定义类是否重写object类中equals方法，没有重写相当于==</li>
+<li>重写equals方法，会比较类的相应属性是否都相等</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>final，finally，finalize区别</p>
+<ul>
+<li>final：修饰符</li>
+<li>finally：异常处理</li>
+<li>finalize：方法名 垃圾回收</li>
+</ul>
+</li>
+</ol>
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><ol>
+<li><p>为什么要有包装类(或封装类）<br>为了使基本数据类型的变量具有类的特征，引入包装类</p>
+</li>
+<li><p>基本数据类型与对应的包装类：</p>
+<p><img src="\images\oop\oop3.png" alt></p>
+</li>
+<li><p>需要掌握的类型间的转换：（基本数据类型、包装类、String）</p>
+<p><img src="\images\oop\oop4.png" alt></p>
+<ul>
+<li>简易版：<ol>
+<li>基本数据类型<--->包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</---></li>
+<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
+<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)<br>注意：转换时，可能会报NumberFormatException</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="static-静态的"><a href="#static-静态的" class="headerlink" title="static(静态的)"></a>static(静态的)</h3><ul>
+<li>修饰结构：属性，方法，代码块，内部类</li>
+<li>被修饰后的成员具有特点<ol>
+<li>随类的加载而加载</li>
+<li>优于对象存在</li>
+<li>修饰的成员，被所有对象共享</li>
+<li>可以不创建对象，直接被类调用</li>
+</ol>
+</li>
+<li>static修饰属性：静态变量（类变量）<ol>
+<li>属性，是否使用static修饰，又分为：静态属性  vs 非静态属性(实例变量)</li>
+<li>实例变量：我们创建了类的多个对象，每个对象都独立的拥一套类中的非静态属性。当修改其中一个对象中的非静态属性时，不会导致其他对象中同样的属性值的修改。</li>
+<li>静态变量：我们创建了类的多个对象，多个对象共享同一个静态变量。当通过某一个对象修改静态变量时，会导致其他对象调用此静态变量时，是修改过了的。</li>
+<li>static修饰属性的其他说明：<ul>
+<li>静态变量随着类的加载而加载。可以通过”类.静态变量”的方式进行调用</li>
+<li>静态变量的加载要早于对象的创建。</li>
+<li>由于类只会加载一次，则静态变量在内存中也只会存在一份：存在方法区的静态域中。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>static修饰方法：静态方法（类方法）<ol>
+<li>可以通过类名.方法名()调用</li>
+<li>静态方法中，只能调用静态的方法或属性</li>
+<li>非静态方法中，既可以调用非静态的方法或属性，也可以调用静态的方法或属性</li>
+<li>不能被重写</li>
+<li>在静态的方法内，不能使用this关键字、super关键字</li>
+</ol>
+</li>
+</ul>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><ol>
+<li><p>可以用来修饰：类、方法、变量</p>
+</li>
+<li><p>具体的：</p>
+<ul>
+<li><p>final 用来修饰一个类:此类不能被其他类所继承。</p>
+<ul>
+<li><p>比如：String类、System类、StringBuffer类</p>
+</li>
+<li><p>final 用来修饰方法：表明此方法不可以被重写</p>
+<ul>
+<li>比如：Object类中getClass();</li>
+</ul>
+</li>
+<li><p>final 用来修饰变量：此时的”变量”就称为是一个常量</p>
+</li>
+<li><p>final修饰属性：可以考虑赋值的位置：显式初始化、代码块中初始化、构造器中初始化</p>
+</li>
+<li><p>final修饰局部变量：</p>
+<ul>
+<li>尤其是使用final修饰形参时，表明此形参是一个常量。当我们调用此方法时，给常量形参赋一个实参。一旦赋值以后，就只能在方法体内使用此形参，但不能进行重新赋值。</li>
+</ul>
+</li>
+<li><p>static final 用来修饰属性：全局常量</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h3><ol>
+<li><p>可以用来修饰：类、方法</p>
+</li>
+<li><p>具体的：</p>
+<ul>
+<li><p>abstract修饰类：抽象类</p>
+<ol>
+<li>此类不能实例化</li>
+<li>抽象类中一定有构造器，便于子类实例化时调用（涉及：子类对象实例化的全过程）</li>
+<li>开发中，都会提供抽象类的子类，让子类对象实例化，完成相关的操作 —&gt;抽象的使用前提：继承性</li>
+</ol>
+</li>
+<li><p>abstract修饰方法：抽象方法</p>
+<ul>
+<li>抽象方法只方法的声明，没方法体</li>
+<li>包含抽象方法的类，一定是一个抽象类。反之，抽象类中可以没有抽象方法的。</li>
+<li>若子类重写了父类中的所的抽象方法后，此子类方可实例化</li>
+<li>若子类没重写父类中的所的抽象方法，则此子类也是一个抽象类，需要使用abstract修饰</li>
+</ul>
+</li>
+<li>注意点：<ol>
+<li>abstract不能用来修饰：属性、构造器等结构</li>
+<li>abstract不能用来修饰私方法、静态方法、final的方法、final的类</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="interface-接口"><a href="#interface-接口" class="headerlink" title="interface(接口)"></a>interface(接口)</h3><ol>
+<li><p>使用说明：</p>
+<ol>
+<li>接口使用interface来定义</li>
+<li>Java中，接口和类是并列的两个结构</li>
+<li>如何定义接口：定义接口中的成员<ul>
+<li>JDK7及以前：只能定义全局常量和抽象方法</li>
+<li>全局常量：public static final的.但是书写时，可以省略不写</li>
+<li>抽象方法：public abstract的</li>
+<li>JDK8：除了定义全局常量和抽象方法之外，还可以定义静态方法、默认方法（略</li>
+</ul>
+</li>
+<li>接口中不能定义构造器的！意味着接口不可以实例化</li>
+<li><p>Java开发中，接口通过让类去实现(implements)的方式来使用.</p>
+<ul>
+<li>如果实现类覆盖了接口中的所抽象方法，则此实现类就可以实例化</li>
+<li>如果实现类没覆盖接口中所的抽象方法，则此实现类仍为一个抽象类</li>
+</ul>
+</li>
+<li><p>Java类可以实现多个接口   —&gt;弥补了Java单继承性的局限性</p>
+<ul>
+<li>格式：class AA extends BB implements CC,DD,EE</li>
+</ul>
+</li>
+<li><p>接口与接口之间可以继承，而且可以多继承</p>
+</li>
+<li>接口的具体使用，体现多态性</li>
+<li>接口，实际上可以看做是一种规范</li>
+</ol>
+</li>
+<li><p>Java8中关于接口的新规范</p>
+<ol>
+<li>接口中定义的静态方法，只能通过接口来调用。</li>
+<li>通过实现类的对象，可以调用接口中的默认方法。如果实现类重写了接口中的默认方法，调用时，仍然调用的是重写以后的方法</li>
+<li>如果子类(或实现类)继承的父类和实现的接口中声明了同名同参数的默认方法，那么子类在没重写此方法的情况下，默认调用的是父类中的同名同参数的方法。–&gt;类优先原则</li>
+<li>如果实现类实现了多个接口，而这多个接口中定义了同名同参数的默认方法，那么在实现类没重写此方法的情况下，报错。–&gt;接口冲突。这就需要我们必须在实现类中重写此方法</li>
+<li>如何在子类(或实现类)的方法中调用父类、接口中被重写的方法</li>
+</ol>
+</li>
+<li><p>抽象类和接口的异同？</p>
+<ul>
+<li>相同点：都不能实例化，都包含抽象方法</li>
+</ul>
+</li>
+</ol>
+<h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/07/Java基础/" rel="prev" title="Java基础">
+                Java基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">鹏飞</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象-OOP"><span class="nav-number">1.</span> <span class="nav-text">面向对象(OOP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向过程-POP"><span class="nav-number">2.</span> <span class="nav-text">面向过程(POP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三大特征"><span class="nav-number">3.</span> <span class="nav-text">三大特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言的基本元素"><span class="nav-number">4.</span> <span class="nav-text">Java语言的基本元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类和对象"><span class="nav-number">4.1.</span> <span class="nav-text">类和对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的结构"><span class="nav-number">5.</span> <span class="nav-text">类的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-field-成员变量"><span class="nav-number">5.1.</span> <span class="nav-text">属性(field,成员变量)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-method，函数"><span class="nav-number">6.</span> <span class="nav-text">方法(method，函数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装与隐藏"><span class="nav-number">7.</span> <span class="nav-text">封装与隐藏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造器-Constructor或构造方法"><span class="nav-number">8.</span> <span class="nav-text">构造器(Constructor或构造方法)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaBean"><span class="nav-number">8.1.</span> <span class="nav-text">JavaBean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this关键字"><span class="nav-number">9.</span> <span class="nav-text">this关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承性-inheritance"><span class="nav-number">10.</span> <span class="nav-text">继承性(inheritance)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">11.</span> <span class="nav-text">super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-number">12.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object类"><span class="nav-number">13.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包装类"><span class="nav-number">14.</span> <span class="nav-text">包装类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-静态的"><span class="nav-number">15.</span> <span class="nav-text">static(静态的)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">16.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#abstract"><span class="nav-number">17.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interface-接口"><span class="nav-number">18.</span> <span class="nav-text">interface(接口)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部类"><span class="nav-number">19.</span> <span class="nav-text">内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块"><span class="nav-number">20.</span> <span class="nav-text">代码块</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">鹏飞</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
