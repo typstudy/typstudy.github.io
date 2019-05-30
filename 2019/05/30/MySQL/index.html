@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本单元目标​1234567891011121314151617181920212223242526272829303132333435一、为什么要学习数据库二、数据库的相关概念      	DBMS、DB、SQL三、数据库存储数据的特点四、初始MySQL	MySQL产品的介绍        	MySQL产品的安装          ★        	MySQL服务的启动和停止     ★	MyS">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/MySQL/index.html">
+<meta property="og:site_name" content="鹏飞@博客">
+<meta property="og:description" content="本单元目标​1234567891011121314151617181920212223242526272829303132333435一、为什么要学习数据库二、数据库的相关概念      	DBMS、DB、SQL三、数据库存储数据的特点四、初始MySQL	MySQL产品的介绍        	MySQL产品的安装          ★        	MySQL服务的启动和停止     ★	MyS">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-30T09:34:56.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL">
+<meta name="twitter:description" content="本单元目标​1234567891011121314151617181920212223242526272829303132333435一、为什么要学习数据库二、数据库的相关概念      	DBMS、DB、SQL三、数据库存储数据的特点四、初始MySQL	MySQL产品的介绍        	MySQL产品的安装          ★        	MySQL服务的启动和停止     ★	MyS">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/MySQL/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MySQL | 鹏飞@博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鹏飞@博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="鹏飞">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹏飞@博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-30 17:26:01 / 修改时间：17:34:56" itemprop="dateCreated datePublished" datetime="2019-05-30T17:26:01+08:00">2019-05-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="本单元目标​"><a href="#本单元目标​" class="headerlink" title="本单元目标​"></a>本单元目标​</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">一、为什么要学习数据库</span><br><span class="line">二、数据库的相关概念      </span><br><span class="line">	DBMS、DB、SQL</span><br><span class="line">三、数据库存储数据的特点</span><br><span class="line">四、初始MySQL</span><br><span class="line">	MySQL产品的介绍        </span><br><span class="line">	MySQL产品的安装          ★        </span><br><span class="line">	MySQL服务的启动和停止     ★</span><br><span class="line">	MySQL服务的登录和退出     ★      </span><br><span class="line">	MySQL的常见命令和语法规范      </span><br><span class="line">五、DQL语言的学习   ★              </span><br><span class="line">	基础查询        ★             </span><br><span class="line">	条件查询  	   ★			</span><br><span class="line">	排查询  	   ★				</span><br><span class="line">	常见函数        ★              </span><br><span class="line">	分组函数        ★              </span><br><span class="line">	分组查询		   ★			</span><br><span class="line">	连接查询	 	★			</span><br><span class="line">	子查询       √                  </span><br><span class="line">	分页查询       ★              </span><br><span class="line">	union联合查询	√			</span><br><span class="line">六、DML语言的学习    ★             </span><br><span class="line">	插入语句						</span><br><span class="line">	修改语句						</span><br><span class="line">	删除语句						</span><br><span class="line">七、DDL语言的学习  </span><br><span class="line">	库和表的管理	 √				</span><br><span class="line">	常见数据类型介绍  √          </span><br><span class="line">	常见约束  	  √			</span><br><span class="line">八、TCL语言的学习</span><br><span class="line">	事务和事务处理                 </span><br><span class="line">九、视图的讲解           √</span><br><span class="line">十、变量                      </span><br><span class="line">十一、存储过程和函数   </span><br><span class="line">十二、流程控制结构</span><br></pre></td></tr></table></figure>
+<h2 id="数据库的好处"><a href="#数据库的好处" class="headerlink" title="数据库的好处"></a>数据库的好处</h2><p>​    1.持久化数据到本地<br>​    2.可以实现结构化查询，方便管理</p>
+<h2 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><p>​    1、DB：数据库，保存一组有组织的数据的容器<br>​    2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据<br>​    3、SQL:结构化查询语言，用于和DBMS通信的语言</p>
+<h2 id="数据库存储数据的特点"><a href="#数据库存储数据的特点" class="headerlink" title="数据库存储数据的特点"></a>数据库存储数据的特点</h2><p>​    1、将数据放到表中，表再放到库中<br>​    2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。<br>​    3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。<br>​    4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”<br>​    5、表中的数据是按行存储的，每一行类似于java中的“对象”。</p>
+<h2 id="MySQL产品的介绍和安装"><a href="#MySQL产品的介绍和安装" class="headerlink" title="MySQL产品的介绍和安装"></a>MySQL产品的介绍和安装</h2><h3 id="MySQL服务的启动和停止"><a href="#MySQL服务的启动和停止" class="headerlink" title="MySQL服务的启动和停止"></a>MySQL服务的启动和停止</h3><p>​    方式一：计算机——右击管理——服务<br>​    方式二：通过管理员身份运行<br>​    net start 服务名（启动服务）<br>​    net stop 服务名（停止服务）</p>
+<h3 id="MySQL服务的登录和退出"><a href="#MySQL服务的登录和退出" class="headerlink" title="MySQL服务的登录和退出"></a>MySQL服务的登录和退出</h3><p>​    方式一：通过mysql自带的客户端<br>​    只限于root用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">方式二：通过windows自带的客户端</span><br><span class="line">登录：</span><br><span class="line">mysql 【-h主机名 -P端口号 】-u用户名 -p密码</span><br><span class="line"></span><br><span class="line">退出：</span><br><span class="line">exit或ctrl+C</span><br><span class="line">	</span><br><span class="line">###MySQL的常见命令</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1.查看当前所有的数据库</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br><span class="line">2.打开指定的库</span><br><span class="line"><span class="keyword">use</span> 库名</span><br><span class="line"><span class="number">3.</span>查看当前库的所有表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br><span class="line">4.查看其它库的所有表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span> <span class="keyword">from</span> 库名;</span><br><span class="line">5.创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line"></span><br><span class="line">	列名 列类型,</span><br><span class="line">	列名 列类型，</span><br><span class="line">	。。。</span><br><span class="line">);</span><br><span class="line">6.查看表结构</span><br><span class="line">desc 表名;</span><br><span class="line">7.查看服务器的版本</span><br><span class="line">方式一：登录到mysql服务端</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">version</span>();</span><br><span class="line">方式二：没有登录到mysql服务端</span><br><span class="line">mysql <span class="comment">--version</span></span><br><span class="line">或</span><br><span class="line">mysql <span class="comment">--V</span></span><br></pre></td></tr></table></figure>
+<h3 id="MySQL的语法规范"><a href="#MySQL的语法规范" class="headerlink" title="MySQL的语法规范"></a>MySQL的语法规范</h3><p>​    1.不区分大小写,但建议关键字大写，表名、列名小写<br>​    2.每条命令最好用分号结尾<br>​    3.每条命令根据需要，可以进行缩进 或换行<br>​    4.注释<br>​        单行注释：#注释文字<br>​        单行注释：– 注释文字<br>​        多行注释：/<em> 注释文字  </em>/</p>
+<h3 id="SQL的语言分类"><a href="#SQL的语言分类" class="headerlink" title="SQL的语言分类"></a>SQL的语言分类</h3><p>​    DQL（Data Query Language）：数据查询语言<br>​        select<br>​    DML(Data Manipulate Language):数据操作语言<br>​        insert 、update、delete<br>​    DDL（Data Define Languge）：数据定义语言<br>​        create、drop、alter<br>​    TCL（Transaction Control Language）：事务控制语言<br>​        commit、rollback</p>
+<h3 id="SQL的常见命令"><a href="#SQL的常见命令" class="headerlink" title="SQL的常见命令"></a>SQL的常见命令</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>； 查看所有的数据库</span><br><span class="line"><span class="keyword">use</span> 库名； 打开指定 的库</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span> ; 显示库中的所有表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span> <span class="keyword">from</span> 库名;显示指定库中的所有表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	字段名 字段类型,	</span><br><span class="line">	字段名 字段类型</span><br><span class="line">); 创建表</span><br><span class="line"></span><br><span class="line">desc 表名; 查看指定表的结构</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> 表名;显示表中的所有数据</span><br></pre></td></tr></table></figure>
+<h2 id="DQL语言的学习"><a href="#DQL语言的学习" class="headerlink" title="DQL语言的学习"></a>DQL语言的学习</h2><h3 id="进阶1：基础查询"><a href="#进阶1：基础查询" class="headerlink" title="进阶1：基础查询"></a>进阶1：基础查询</h3><p>​    语法：<br>​    SELECT 要查询的东西<br>​    【FROM 表名】;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">类似于Java中 :System.out.println(要打印的东西);</span><br><span class="line">特点：</span><br><span class="line">* 通过select查询完的结果 ，是一个虚拟的表格，不是真实存在</span><br><span class="line">* 要查询的东西 可以是常量值、可以是表达式、可以是字段、可以是函数</span><br></pre></td></tr></table></figure>
+<h3 id="进阶2：条件查询"><a href="#进阶2：条件查询" class="headerlink" title="进阶2：条件查询"></a>进阶2：条件查询</h3><p>​    条件查询：根据条件过滤原始表的数据，查询到想要的数据<br>​    语法：<br>​    select<br>​        要查询的字段|表达式|常量值|函数<br>​    from<br>​        表<br>​    where<br>​        条件 ;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">分类：</span><br><span class="line">一、条件表达式</span><br><span class="line">	示例：salary&gt;10000</span><br><span class="line">	条件运算符：</span><br><span class="line">	&gt; &lt; &gt;= &lt;= = != &lt;&gt;</span><br><span class="line"></span><br><span class="line">二、逻辑表达式</span><br><span class="line">示例：salary&gt;10000 &amp;&amp; salary&lt;20000</span><br><span class="line"></span><br><span class="line">逻辑运算符：</span><br><span class="line"></span><br><span class="line">	and（&amp;&amp;）:两个条件如果同时成立，结果为true，否则为false</span><br><span class="line">	or(||)：两个条件只要有一个成立，结果为true，否则为false</span><br><span class="line">	not(!)：如果条件成立，则not后为false，否则为true</span><br><span class="line"></span><br><span class="line">三、模糊查询</span><br><span class="line">示例：last_name like &apos;a%&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="进阶3：排序查询"><a href="#进阶3：排序查询" class="headerlink" title="进阶3：排序查询"></a>进阶3：排序查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">	要查询的东西</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	表</span><br><span class="line"><span class="keyword">where</span> </span><br><span class="line">	条件</span><br><span class="line"></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> 排序的字段|表达式|函数|别名 【<span class="keyword">asc</span>|<span class="keyword">desc</span>】</span><br></pre></td></tr></table></figure>
+<h3 id="进阶4：常见函数"><a href="#进阶4：常见函数" class="headerlink" title="进阶4：常见函数"></a>进阶4：常见函数</h3><p>​    一、单行函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">1、字符函数</span><br><span class="line">		concat拼接</span><br><span class="line">		substr截取子串</span><br><span class="line">		upper转换成大写</span><br><span class="line">		lower转换成小写</span><br><span class="line">		trim去前后指定的空格和字符</span><br><span class="line">		ltrim去左边空格</span><br><span class="line">		rtrim去右边空格</span><br><span class="line">		replace替换</span><br><span class="line">		lpad左填充</span><br><span class="line">		rpad右填充</span><br><span class="line">		instr返回子串第一次出现的索引</span><br><span class="line">		length 获取字节个数</span><br><span class="line">2、数学函数</span><br><span class="line">	round 四舍五入</span><br><span class="line">	rand 随机数</span><br><span class="line">	floor向下取整</span><br><span class="line">	ceil向上取整</span><br><span class="line">	mod取余</span><br><span class="line">	truncate截断</span><br><span class="line">3、日期函数</span><br><span class="line">	now当前系统日期+时间</span><br><span class="line">	curdate当前系统日期</span><br><span class="line">	curtime当前系统时间</span><br><span class="line">	str_to_date 将字符转换成日期</span><br><span class="line">	date_format将日期转换成字符</span><br><span class="line">4、流程控制函数</span><br><span class="line">	if 处理双分支</span><br><span class="line">	case语句 处理多分支</span><br><span class="line">		情况1：处理等值判断</span><br><span class="line">		情况2：处理条件判断</span><br><span class="line">	</span><br><span class="line">5、其他函数</span><br><span class="line">	version版本</span><br><span class="line">	database当前库</span><br><span class="line">	user当前连接用户</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<p>二、分组函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sum 求和</span><br><span class="line">max 最大值</span><br><span class="line">min 最小值</span><br><span class="line">avg 平均值</span><br><span class="line">count 计数</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">1、以上五个分组函数都忽略null值，除了count(*)</span><br><span class="line">2、sum和avg一般用于处理数值型</span><br><span class="line">	max、min、count可以处理任何数据类型</span><br><span class="line">   3、都可以搭配distinct使用，用于统计去重后的结果</span><br><span class="line">4、count的参数可以支持：</span><br><span class="line">	字段、*、常量值，一般放1</span><br><span class="line"></span><br><span class="line">   建议使用 count(*)</span><br></pre></td></tr></table></figure>
+<h2 id="进阶5：分组查询"><a href="#进阶5：分组查询" class="headerlink" title="进阶5：分组查询"></a>进阶5：分组查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">	select 查询的字段，分组函数</span><br><span class="line">	from 表</span><br><span class="line">	group by 分组的字段</span><br><span class="line">特点：</span><br><span class="line">1、可以按单个字段分组</span><br><span class="line">2、和分组函数一同查询的字段最好是分组后的字段</span><br><span class="line">3、分组筛选</span><br><span class="line">		针对的表	位置			关键字</span><br><span class="line">分组前筛选：	原始表		group by的前面		where</span><br><span class="line">分组后筛选：	分组后的结果集	group by的后面		having</span><br><span class="line"></span><br><span class="line">4、可以按多个字段分组，字段之间用逗号隔开</span><br><span class="line">5、可以支持排序</span><br><span class="line">6、having后可以支持别名</span><br></pre></td></tr></table></figure>
+<h2 id="进阶6：多表连接查询"><a href="#进阶6：多表连接查询" class="headerlink" title="进阶6：多表连接查询"></a>进阶6：多表连接查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">笛卡尔乘积：如果连接条件省略或无效则会出现</span><br><span class="line">解决办法：添加上连接条件</span><br></pre></td></tr></table></figure>
+<p>一、传统模式下的连接 ：等值连接——非等值连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.等值连接的结果 = 多个表的交集</span><br><span class="line">2.n表连接，至少需要n-1个连接条件</span><br><span class="line">3.多个表不分主次，没有顺序要求</span><br><span class="line">4.一般为表起别名，提高阅读性和性能</span><br></pre></td></tr></table></figure>
+<p>二、sql99语法：通过join关键字实现连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">含义：1999年推出的sql语法</span><br><span class="line">支持：</span><br><span class="line">等值连接、非等值连接 （内连接）</span><br><span class="line">外连接</span><br><span class="line">交叉连接</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line"></span><br><span class="line">select 字段，...</span><br><span class="line">from 表1</span><br><span class="line">【inner|left outer|right outer|cross】join 表2 on  连接条件</span><br><span class="line">【inner|left outer|right outer|cross】join 表3 on  连接条件</span><br><span class="line">【where 筛选条件】</span><br><span class="line">【group by 分组字段】</span><br><span class="line">【having 分组后的筛选条件】</span><br><span class="line">【order by 排序的字段或表达式】</span><br><span class="line"></span><br><span class="line">好处：语句上，连接条件和筛选条件实现了分离，简洁明了！</span><br></pre></td></tr></table></figure>
+<p>​<br>三、自连接</p>
+<p>案例：查询员工名和直接上级的名称</p>
+<p>sql99</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.last_name,m.last_name</span><br><span class="line">FROM employees e</span><br><span class="line">JOIN employees m ON e.`manager_id`=m.`employee_id`;</span><br></pre></td></tr></table></figure>
+<p>sql92</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.last_name,m.last_name</span><br><span class="line">FROM employees e,employees m </span><br><span class="line">WHERE e.`manager_id`=m.`employee_id`;</span><br></pre></td></tr></table></figure>
+<h2 id="进阶7：子查询"><a href="#进阶7：子查询" class="headerlink" title="进阶7：子查询"></a>进阶7：子查询</h2><p>含义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一条查询语句中又嵌套了另一条完整的select语句，其中被嵌套的select语句，称为子查询或内查询</span><br><span class="line">在外面的查询语句，称为主查询或外查询</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1、子查询都放在小括号内</span><br><span class="line">2、子查询可以放在from后面、select后面、where后面、having后面，但一般放在条件的右侧</span><br><span class="line">3、子查询优先于主查询执行，主查询使用了子查询的执行结果</span><br><span class="line">4、子查询根据查询结果的行数不同分为以下两类：</span><br><span class="line">① 单行子查询</span><br><span class="line">	结果集只有一行</span><br><span class="line">	一般搭配单行操作符使用：&gt; &lt; = &lt;&gt; &gt;= &lt;= </span><br><span class="line">	非法使用子查询的情况：</span><br><span class="line">	a、子查询的结果为一组值</span><br><span class="line">	b、子查询的结果为空</span><br><span class="line">	</span><br><span class="line">② 多行子查询</span><br><span class="line">	结果集有多行</span><br><span class="line">	一般搭配多行操作符使用：any、all、in、not in</span><br><span class="line">	in： 属于子查询结果中的任意一个就行</span><br><span class="line">	any和all往往可以用其他查询代替</span><br></pre></td></tr></table></figure>
+<h2 id="进阶8：分页查询"><a href="#进阶8：分页查询" class="headerlink" title="进阶8：分页查询"></a>进阶8：分页查询</h2><p>应用场景：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">实际的web项目中需要根据用户的需求提交对应的分页查询的sql语句</span><br></pre></td></tr></table></figure>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select 字段|表达式,...</span><br><span class="line">from 表</span><br><span class="line">【where 条件】</span><br><span class="line">【group by 分组字段】</span><br><span class="line">【having 条件】</span><br><span class="line">【order by 排序的字段】</span><br><span class="line">limit 【起始的条目索引，】条目数;</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.起始条目索引从0开始</span><br><span class="line"></span><br><span class="line">2.limit子句放在查询语句的最后</span><br><span class="line"></span><br><span class="line">3.公式：select * from  表 limit （page-1）*sizePerPage,sizePerPage</span><br><span class="line">假如:</span><br><span class="line">每页显示条目数sizePerPage</span><br><span class="line">要显示的页数 page</span><br></pre></td></tr></table></figure>
+<p>##进阶9：联合查询</p>
+<p>引入：<br>    union 联合、合并</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】</span><br><span class="line">select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】</span><br><span class="line">select 字段|常量|表达式|函数 【from 表】 【where 条件】 union  【all】</span><br><span class="line">.....</span><br><span class="line">select 字段|常量|表达式|函数 【from 表】 【where 条件】</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、多条查询语句的查询的列数必须是一致的</span><br><span class="line">2、多条查询语句的查询的列的类型几乎相同</span><br><span class="line">3、union代表去重，union all代表不去重</span><br></pre></td></tr></table></figure>
+<h2 id="DML语言"><a href="#DML语言" class="headerlink" title="DML语言"></a>DML语言</h2><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>语法：<br>    insert into 表名(字段名，…)<br>    values(值1，…);</p>
+<p>特点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、字段类型和值类型一致或兼容，而且一一对应</span><br><span class="line">2、可以为空的字段，可以不用插入值，或用null填充</span><br><span class="line">3、不可以为空的字段，必须插入值</span><br><span class="line">4、字段个数和值的个数必须一致</span><br><span class="line">5、字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致</span><br></pre></td></tr></table></figure>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>修改单表语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update 表名 set 字段=新值,字段=新值</span><br><span class="line">【where 条件】</span><br></pre></td></tr></table></figure>
+<p>修改多表语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">update 表1 别名1,表2 别名2</span><br><span class="line">set 字段=新值，字段=新值</span><br><span class="line">where 连接条件</span><br><span class="line">and 筛选条件</span><br></pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>方式1：delete语句 </p>
+<p>单表的删除： ★<br>    delete from 表名 【where 筛选条件】</p>
+<p>多表的删除：<br>    delete 别名1，别名2<br>    from 表1 别名1，表2 别名2<br>    where 连接条件<br>    and 筛选条件;</p>
+<p>方式2：truncate语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truncate table 表名</span><br></pre></td></tr></table></figure>
+<p>两种方式的区别【面试题】</p>
+<pre><code>#1.truncate不能加where条件，而delete可以加where条件
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#2.truncate的效率高一丢丢</span><br><span class="line"></span><br><span class="line">#3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始</span><br><span class="line">#delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始</span><br><span class="line"></span><br><span class="line">#4.truncate删除不能回滚，delete删除可以回滚</span><br></pre></td></tr></table></figure>
+<h2 id="DDL语句"><a href="#DDL语句" class="headerlink" title="DDL语句"></a>DDL语句</h2><h3 id="库和表的管理"><a href="#库和表的管理" class="headerlink" title="库和表的管理"></a>库和表的管理</h3><p>库的管理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一、创建库</span><br><span class="line">create database 库名</span><br><span class="line">二、删除库</span><br><span class="line">drop database 库名</span><br></pre></td></tr></table></figure>
+<p>表的管理：<br>    1.创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> stuinfo(</span><br><span class="line">	stuId <span class="built_in">INT</span>,</span><br><span class="line">	stuName <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	gender <span class="built_in">CHAR</span>,</span><br><span class="line">	bornDate DATETIME</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">DESC studentinfo;</span><br><span class="line"><span class="comment">#2.修改表 alter</span></span><br><span class="line">语法：<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span>|<span class="keyword">MODIFY</span>|<span class="keyword">DROP</span>|<span class="keyword">CHANGE</span> <span class="keyword">COLUMN</span> 字段名 【字段类型】;</span><br><span class="line"></span><br><span class="line"><span class="comment">#①修改字段名</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> studentinfo <span class="keyword">CHANGE</span>  <span class="keyword">COLUMN</span> sex gender <span class="built_in">CHAR</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#②修改表名</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">RENAME</span> [<span class="keyword">TO</span>]  studentinfo;</span><br><span class="line"><span class="comment">#③修改字段类型和列级约束</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> studentinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> borndate <span class="built_in">DATE</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">#④添加字段</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> studentinfo <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> email <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">first</span>;</span><br><span class="line"><span class="comment">#⑤删除字段</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> studentinfo <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> email;</span><br><span class="line"><span class="comment">#3.删除表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> [<span class="keyword">IF</span> <span class="keyword">EXISTS</span>] studentinfo;</span><br></pre></td></tr></table></figure>
+<h3 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">整型：</span><br><span class="line">	</span><br><span class="line">小数：</span><br><span class="line">	浮点型</span><br><span class="line">	定点型</span><br><span class="line">字符型：</span><br><span class="line">日期型：</span><br><span class="line">Blob类型：</span><br></pre></td></tr></table></figure>
+<h3 id="常见约束"><a href="#常见约束" class="headerlink" title="常见约束"></a>常见约束</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NOT NULL</span><br><span class="line">DEFAULT</span><br><span class="line">UNIQUE</span><br><span class="line">CHECK</span><br><span class="line">PRIMARY KEY</span><br><span class="line">FOREIGN KEY</span><br></pre></td></tr></table></figure>
+<h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>​    通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>​    （ACID）<br>​    原子性：要么都执行，要么都回滚<br>​    一致性：保证数据的状态操作前和操作后保持一致<br>​    隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰<br>​    持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改</p>
+<p>相关步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、开启事务</span><br><span class="line">2、编写事务的一组逻辑操作单元（多条sql语句）</span><br><span class="line">3、提交事务或回滚事务</span><br></pre></td></tr></table></figure>
+<h3 id="事务的分类："><a href="#事务的分类：" class="headerlink" title="事务的分类："></a>事务的分类：</h3><p>隐式事务，没有明显的开启和结束事务的标志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">比如</span><br><span class="line">insert、update、delete语句本身就是一个事务</span><br></pre></td></tr></table></figure>
+<p>显式事务，具有明显的开启和结束事务的标志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、开启事务</span><br><span class="line">取消自动提交事务的功能</span><br><span class="line"></span><br><span class="line">2、编写事务的一组逻辑操作单元（多条sql语句）</span><br><span class="line">insert</span><br><span class="line">update</span><br><span class="line">delete</span><br><span class="line"></span><br><span class="line">3、提交事务或回滚事务</span><br></pre></td></tr></table></figure>
+<h3 id="使用到的关键字"><a href="#使用到的关键字" class="headerlink" title="使用到的关键字"></a>使用到的关键字</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">set autocommit=0;</span><br><span class="line">start transaction;</span><br><span class="line">commit;</span><br><span class="line">rollback;</span><br><span class="line"></span><br><span class="line">savepoint  断点</span><br><span class="line">commit to 断点</span><br><span class="line">rollback to 断点</span><br></pre></td></tr></table></figure>
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别:"></a>事务的隔离级别:</h3><p>事务并发问题如何发生？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当多个事务同时操作同一个数据库的相同数据时</span><br></pre></td></tr></table></figure>
+<p>事务的并发问题有哪些？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">脏读：一个事务读取到了另外一个事务未提交的数据</span><br><span class="line">不可重复读：同一个事务中，多次读取到的数据不一致</span><br><span class="line">幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据</span><br></pre></td></tr></table></figure>
+<p>如何避免事务的并发问题？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">通过设置事务的隔离级别</span><br><span class="line">1、READ UNCOMMITTED</span><br><span class="line">2、READ COMMITTED 可以避免脏读</span><br><span class="line">3、REPEATABLE READ 可以避免脏读、不可重复读和一部分幻读</span><br><span class="line">4、SERIALIZABLE可以避免脏读、不可重复读和幻读</span><br></pre></td></tr></table></figure>
+<p>设置隔离级别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set session|global  transaction isolation level 隔离级别名;</span><br></pre></td></tr></table></figure>
+<p>查看隔离级别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @@tx_isolation;</span><br></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>含义：理解成一张虚拟的表</p>
+<p>视图和表的区别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	使用方式	占用物理空间</span><br><span class="line"></span><br><span class="line">视图	完全相同	不占用，仅仅保存的是sql逻辑</span><br><span class="line"></span><br><span class="line">表	完全相同	占用</span><br></pre></td></tr></table></figure>
+<p>视图的好处：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、sql语句提高重用性，效率高</span><br><span class="line">2、和表实现了分离，提高了安全性</span><br></pre></td></tr></table></figure>
+<h3 id="视图的创建"><a href="#视图的创建" class="headerlink" title="视图的创建"></a>视图的创建</h3><p>​    语法：<br>​    CREATE VIEW  视图名<br>​    AS<br>​    查询语句;</p>
+<h3 id="视图的增删改查"><a href="#视图的增删改查" class="headerlink" title="视图的增删改查"></a>视图的增删改查</h3><p>​    1、查看视图的数据 ★<br>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM my_v4;</span><br><span class="line">SELECT * FROM my_v1 WHERE last_name=&apos;Partners&apos;;</span><br><span class="line"></span><br><span class="line">2、插入视图的数据</span><br><span class="line">INSERT INTO my_v4(last_name,department_id) VALUES(&apos;虚竹&apos;,90);</span><br><span class="line"></span><br><span class="line">3、修改视图的数据</span><br><span class="line"></span><br><span class="line">UPDATE my_v4 SET last_name =&apos;梦姑&apos; WHERE last_name=&apos;虚竹&apos;;</span><br></pre></td></tr></table></figure>
+<p>​<br>​    4、删除视图的数据<br>​    DELETE FROM my_v4;</p>
+<h3 id="某些视图不能更新"><a href="#某些视图不能更新" class="headerlink" title="某些视图不能更新"></a>某些视图不能更新</h3><p>​    包含以下关键字的sql语句：分组函数、distinct、group  by、having、union或者union all<br>​    常量视图<br>​    Select中包含子查询<br>​    join<br>​    from一个不能更新的视图<br>​    where子句的子查询引用了from子句中的表</p>
+<h3 id="视图逻辑的更新"><a href="#视图逻辑的更新" class="headerlink" title="视图逻辑的更新"></a>视图逻辑的更新</h3><p>​    方式一：<br>​    CREATE OR REPLACE VIEW test_v7<br>​    AS<br>​    SELECT last_name FROM employees<br>​    WHERE employee_id&gt;100;<br>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#方式二:</span><br><span class="line">ALTER VIEW test_v7</span><br><span class="line">AS</span><br><span class="line">SELECT employee_id FROM employees;</span><br><span class="line"></span><br><span class="line">SELECT * FROM test_v7;</span><br></pre></td></tr></table></figure>
+<h3 id="视图的删除"><a href="#视图的删除" class="headerlink" title="视图的删除"></a>视图的删除</h3><p>​    DROP VIEW test_v1,test_v2,test_v3;</p>
+<h3 id="视图结构的查看"><a href="#视图结构的查看" class="headerlink" title="视图结构的查看"></a>视图结构的查看</h3><p>​    DESC test_v7;<br>​    SHOW CREATE VIEW test_v7;</p>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><p>含义：一组经过预先编译的sql语句的集合<br>好处：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、提高了sql语句的重用性，减少了开发程序员的压力</span><br><span class="line">2、提高了效率</span><br><span class="line">3、减少了传输次数</span><br></pre></td></tr></table></figure>
+<p>分类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、无返回无参</span><br><span class="line">2、仅仅带in类型，无返回有参</span><br><span class="line">3、仅仅带out类型，有返回无参</span><br><span class="line">4、既带in又带out，有返回有参</span><br><span class="line">5、带inout，有返回有参</span><br><span class="line">注意：in、out、inout都可以在一个存储过程中带多个</span><br></pre></td></tr></table></figure>
+<h3 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h3><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create procedure 存储过程名(in|out|inout 参数名  参数类型,...)</span><br><span class="line">begin</span><br><span class="line">	存储过程体</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>类似于方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回类型 方法名(参数类型 参数名,...)&#123;</span><br><span class="line"></span><br><span class="line">	方法体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1、需要设置新的结束标记</span><br><span class="line">delimiter 新的结束标记</span><br><span class="line">示例：</span><br><span class="line">delimiter $</span><br><span class="line"></span><br><span class="line">CREATE PROCEDURE 存储过程名(IN|OUT|INOUT 参数名  参数类型,...)</span><br><span class="line">BEGIN</span><br><span class="line">	sql语句1;</span><br><span class="line">	sql语句2;</span><br><span class="line"></span><br><span class="line">END $</span><br><span class="line"></span><br><span class="line">2、存储过程体中可以有多条sql语句，如果仅仅一条sql语句，则可以省略begin end</span><br><span class="line"></span><br><span class="line">3、参数前面的符号的意思</span><br><span class="line">in:该参数只能作为输入 （该参数不能做返回值）</span><br><span class="line">out：该参数只能作为输出（该参数只能做返回值）</span><br><span class="line">inout：既能做输入又能做输出</span><br></pre></td></tr></table></figure>
+<h2 id="调用存储过程"><a href="#调用存储过程" class="headerlink" title="调用存储过程"></a>调用存储过程</h2><p>​    call 存储过程名(实参列表)</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="创建函数"><a href="#创建函数" class="headerlink" title="创建函数"></a>创建函数</h3><p>学过的函数：LENGTH、SUBSTR、CONCAT等<br>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION 函数名(参数名 参数类型,...) RETURNS 返回类型</span><br><span class="line">BEGIN</span><br><span class="line">	函数体</span><br><span class="line"></span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<h3 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h3><p>​    SELECT 函数名（实参列表）</p>
+<h3 id="函数和存储过程的区别"><a href="#函数和存储过程的区别" class="headerlink" title="函数和存储过程的区别"></a>函数和存储过程的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">		关键字		调用语法	返回值			应用场景</span><br><span class="line">函数		FUNCTION	SELECT 函数()	只能是一个		一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个</span><br><span class="line">存储过程	PROCEDURE	CALL 存储过程()	可以有0个或多个		一般用于更新</span><br></pre></td></tr></table></figure>
+<h2 id="流程控制结构"><a href="#流程控制结构" class="headerlink" title="流程控制结构"></a>流程控制结构</h2><h3 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h3><p>一、全局变量</p>
+<p>作用域：针对于所有会话（连接）有效，但不能跨重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">查看所有全局变量</span><br><span class="line">SHOW GLOBAL VARIABLES;</span><br><span class="line">查看满足条件的部分系统变量</span><br><span class="line">SHOW GLOBAL VARIABLES LIKE &apos;%char%&apos;;</span><br><span class="line">查看指定的系统变量的值</span><br><span class="line">SELECT @@global.autocommit;</span><br><span class="line">为某个系统变量赋值</span><br><span class="line">SET @@global.autocommit=0;</span><br><span class="line">SET GLOBAL autocommit=0;</span><br></pre></td></tr></table></figure>
+<p>二、会话变量</p>
+<p>作用域：针对于当前会话（连接）有效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">查看所有会话变量</span><br><span class="line">SHOW SESSION VARIABLES;</span><br><span class="line">查看满足条件的部分会话变量</span><br><span class="line">SHOW SESSION VARIABLES LIKE &apos;%char%&apos;;</span><br><span class="line">查看指定的会话变量的值</span><br><span class="line">SELECT @@autocommit;</span><br><span class="line">SELECT @@session.tx_isolation;</span><br><span class="line">为某个会话变量赋值</span><br><span class="line">SET @@session.tx_isolation=&apos;read-uncommitted&apos;;</span><br><span class="line">SET SESSION tx_isolation=&apos;read-committed&apos;;</span><br></pre></td></tr></table></figure>
+<h3 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h3><p>一、用户变量</p>
+<p>声明并初始化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET @变量名=值;</span><br><span class="line">SET @变量名:=值;</span><br><span class="line">SELECT @变量名:=值;</span><br></pre></td></tr></table></figure>
+<p>赋值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方式一：一般用于赋简单的值</span><br><span class="line">SET 变量名=值;</span><br><span class="line">SET 变量名:=值;</span><br><span class="line">SELECT 变量名:=值;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方式二：一般用于赋表 中的字段值</span><br><span class="line">SELECT 字段名或表达式 INTO 变量</span><br><span class="line">FROM 表;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @变量名;</span><br></pre></td></tr></table></figure>
+<p>二、局部变量</p>
+<p>声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declare 变量名 类型 【default 值】;</span><br></pre></td></tr></table></figure>
+<p>赋值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方式一：一般用于赋简单的值</span><br><span class="line">SET 变量名=值;</span><br><span class="line">SET 变量名:=值;</span><br><span class="line">SELECT 变量名:=值;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方式二：一般用于赋表 中的字段值</span><br><span class="line">SELECT 字段名或表达式 INTO 变量</span><br><span class="line">FROM 表;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 变量名</span><br></pre></td></tr></table></figure>
+<p>二者的区别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">作用域			定义位置		语法</span><br></pre></td></tr></table></figure>
+<p>用户变量    当前会话        会话的任何地方        加@符号，不用指定类型<br>局部变量    定义它的BEGIN END中     BEGIN END的第一句话    一般不用加@,需要指定类型</p>
+<p>###分支<br>一、if函数<br>    语法：if(条件，值1，值2)<br>    特点：可以用在任何位置</p>
+<p>二、case语句</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">情况一：类似于switch</span><br><span class="line">case 表达式</span><br><span class="line">when 值1 then 结果1或语句1(如果是语句，需要加分号) </span><br><span class="line">when 值2 then 结果2或语句2(如果是语句，需要加分号)</span><br><span class="line">...</span><br><span class="line">else 结果n或语句n(如果是语句，需要加分号)</span><br><span class="line">end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）</span><br><span class="line"></span><br><span class="line">情况二：类似于多重if</span><br><span class="line">case </span><br><span class="line">when 条件1 then 结果1或语句1(如果是语句，需要加分号) </span><br><span class="line">when 条件2 then 结果2或语句2(如果是语句，需要加分号)</span><br><span class="line">...</span><br><span class="line">else 结果n或语句n(如果是语句，需要加分号)</span><br><span class="line">end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）</span><br></pre></td></tr></table></figure>
+<p>特点：<br>    可以用在任何位置</p>
+<p>三、if elseif语句</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if 情况1 then 语句1;</span><br><span class="line">elseif 情况2 then 语句2;</span><br><span class="line">...</span><br><span class="line">else 语句n;</span><br><span class="line">end if;</span><br></pre></td></tr></table></figure>
+<p>特点：<br>    只能用在begin end中！！！！！！！！！！！！！！！</p>
+<p>三者比较：<br>            应用场合<br>    if函数        简单双分支<br>    case结构    等值判断 的多分支<br>    if结构        区间判断 的多分支</p>
+<p>###循环</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">【标签：】WHILE 循环条件  DO</span><br><span class="line">	循环体</span><br><span class="line">END WHILE 【标签】;</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">只能放在BEGIN END里面</span><br><span class="line"></span><br><span class="line">如果要搭配leave跳转语句，需要使用标签，否则可以不用标签</span><br><span class="line"></span><br><span class="line">leave类似于java中的break语句，跳出所在循环！！！</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/新特性/" rel="next" title="新特性">
+                <i class="fa fa-chevron-left"></i> 新特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="鹏飞">
+            
+              <p class="site-author-name" itemprop="name">鹏飞</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/yourname" title="GitHub &rarr; https://github.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:yourname@gmail.com" title="E-Mail &rarr; mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/yourname" title="Weibo &rarr; https://weibo.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本单元目标​"><span class="nav-number">1.</span> <span class="nav-text">本单元目标​</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的好处"><span class="nav-number">2.</span> <span class="nav-text">数据库的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关概念"><span class="nav-number">3.</span> <span class="nav-text">数据库相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库存储数据的特点"><span class="nav-number">4.</span> <span class="nav-text">数据库存储数据的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL产品的介绍和安装"><span class="nav-number">5.</span> <span class="nav-text">MySQL产品的介绍和安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL服务的启动和停止"><span class="nav-number">5.1.</span> <span class="nav-text">MySQL服务的启动和停止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL服务的登录和退出"><span class="nav-number">5.2.</span> <span class="nav-text">MySQL服务的登录和退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL的语法规范"><span class="nav-number">5.3.</span> <span class="nav-text">MySQL的语法规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL的语言分类"><span class="nav-number">5.4.</span> <span class="nav-text">SQL的语言分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL的常见命令"><span class="nav-number">5.5.</span> <span class="nav-text">SQL的常见命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL语言的学习"><span class="nav-number">6.</span> <span class="nav-text">DQL语言的学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶1：基础查询"><span class="nav-number">6.1.</span> <span class="nav-text">进阶1：基础查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶2：条件查询"><span class="nav-number">6.2.</span> <span class="nav-text">进阶2：条件查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶3：排序查询"><span class="nav-number">6.3.</span> <span class="nav-text">进阶3：排序查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶4：常见函数"><span class="nav-number">6.4.</span> <span class="nav-text">进阶4：常见函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶5：分组查询"><span class="nav-number">7.</span> <span class="nav-text">进阶5：分组查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶6：多表连接查询"><span class="nav-number">8.</span> <span class="nav-text">进阶6：多表连接查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶7：子查询"><span class="nav-number">9.</span> <span class="nav-text">进阶7：子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶8：分页查询"><span class="nav-number">10.</span> <span class="nav-text">进阶8：分页查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML语言"><span class="nav-number">11.</span> <span class="nav-text">DML语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入"><span class="nav-number">11.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改"><span class="nav-number">11.2.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">11.3.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL语句"><span class="nav-number">12.</span> <span class="nav-text">DDL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#库和表的管理"><span class="nav-number">12.1.</span> <span class="nav-text">库和表的管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见类型"><span class="nav-number">12.2.</span> <span class="nav-text">常见类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见约束"><span class="nav-number">12.3.</span> <span class="nav-text">常见约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库事务"><span class="nav-number">13.</span> <span class="nav-text">数据库事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#含义"><span class="nav-number">13.1.</span> <span class="nav-text">含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">13.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的分类："><span class="nav-number">13.3.</span> <span class="nav-text">事务的分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用到的关键字"><span class="nav-number">13.4.</span> <span class="nav-text">使用到的关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的隔离级别"><span class="nav-number">13.5.</span> <span class="nav-text">事务的隔离级别:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">14.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的创建"><span class="nav-number">14.1.</span> <span class="nav-text">视图的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的增删改查"><span class="nav-number">14.2.</span> <span class="nav-text">视图的增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#某些视图不能更新"><span class="nav-number">14.3.</span> <span class="nav-text">某些视图不能更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图逻辑的更新"><span class="nav-number">14.4.</span> <span class="nav-text">视图逻辑的更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的删除"><span class="nav-number">14.5.</span> <span class="nav-text">视图的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图结构的查看"><span class="nav-number">14.6.</span> <span class="nav-text">视图结构的查看</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储过程"><span class="nav-number">15.</span> <span class="nav-text">存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建存储过程"><span class="nav-number">15.1.</span> <span class="nav-text">创建存储过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用存储过程"><span class="nav-number">16.</span> <span class="nav-text">调用存储过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">17.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建函数"><span class="nav-number">17.1.</span> <span class="nav-text">创建函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用函数"><span class="nav-number">17.2.</span> <span class="nav-text">调用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数和存储过程的区别"><span class="nav-number">17.3.</span> <span class="nav-text">函数和存储过程的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制结构"><span class="nav-number">18.</span> <span class="nav-text">流程控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统变量"><span class="nav-number">18.1.</span> <span class="nav-text">系统变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义变量"><span class="nav-number">18.2.</span> <span class="nav-text">自定义变量</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">鹏飞</span>
+
+  
+
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
